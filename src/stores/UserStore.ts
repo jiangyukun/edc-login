@@ -23,6 +23,15 @@ export default class UserStore {
 
   submitResetPassword = (username, email) => {
     this.submitResetPasswordSuccess = false
-    this.submitResetPasswordSuccess = true
+
+    const options = {
+      "user_name": username,
+      "password": email,
+      "local": '1'
+    }
+    _post(`/user/v1/password/reset`, {body: options}).then(() => {
+      this.submitResetPasswordSuccess = true
+    })
+
   }
 }

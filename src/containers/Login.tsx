@@ -21,7 +21,8 @@ class Login extends React.Component<LoginProps> {
 
   componentWillReceiveProps(nextProps: LoginProps) {
     if (!this.props.loginSuccess && nextProps.loginSuccess) {
-      location.href = 'http://localhost:3081/dev/project'
+      // console.log(1)
+      location.href = '/inline/project'
     }
   }
 
