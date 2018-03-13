@@ -21,7 +21,6 @@ class Login extends React.Component<LoginProps> {
 
   componentWillReceiveProps(nextProps: LoginProps) {
     if (!this.props.loginSuccess && nextProps.loginSuccess) {
-      // console.log(1)
       location.href = '/inline/project'
     }
   }

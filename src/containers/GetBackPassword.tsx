@@ -2,6 +2,10 @@
  * Created by jiangyukun on 2017/11/27.
  */
 import React from 'react'
+import Form from 'app-core/form/Form'
+import Valid from 'app-core/form/Valid'
+
+import {isEmail} from '../core/common.helper'
 
 interface GetBackPasswordProps {
   getBackToIndex: () => void
@@ -11,6 +15,7 @@ interface GetBackPasswordProps {
 
 class GetBackPassword extends React.Component<GetBackPasswordProps> {
   state = {
+    valid: true,
     username: '',
     email: '',
     submitSuccess: false
@@ -36,16 +41,22 @@ class GetBackPassword extends React.Component<GetBackPasswordProps> {
         <header>找回密码</header>
         {
           !this.state.submitSuccess && (
-            <div>
-              <div className="form-item">
-                <input placeholder="用户名" className="input" value={this.state.username} onChange={e => this.setState({username: e.target.value})}/>
+            <Form onValidChange={(valid) => this.setState({valid})}>
+              <div>
+                <div className="form-item">
+                  <Valid valid={this.state.username != ''}>
+                    <input placeholder="用户名" className="input" value={this.state.username} onChange={e => this.setState({username: e.target.value})}/>
+                  </Valid>
+                </div>
+                <div className="form-item">
+                  <Valid valid={isEmail(this.state.email)}>
+                    <input placeholder="邮箱" className="input" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
+                  </Valid>
+                </div>
+                <button onClick={this.submit} disabled={!this.state.valid}>提交</button>
+                <p className="back-to-login-index" onClick={this.props.getBackToIndex}>返回首页</p>
               </div>
-              <div className="form-item">
-                <input placeholder="邮箱" className="input" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
-              </div>
-              <button onClick={this.submit} disabled={!this.state.username || !this.state.email}>提交</button>
-              <p className="back-to-login-index" onClick={this.props.getBackToIndex}>返回首页</p>
-            </div>
+            </Form>
           )
         }
         {
@@ -62,6 +73,7 @@ class GetBackPassword extends React.Component<GetBackPasswordProps> {
             </div>
           )
         }
+
       </div>
     )
   }

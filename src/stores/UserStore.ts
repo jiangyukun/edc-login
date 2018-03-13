@@ -31,7 +31,7 @@ export default class UserStore {
     }
     _post(`/user/v1/password/reset`, {body: options}).then(() => {
       this.submitResetPasswordSuccess = true
-    })
+     })
 
   }
 }
