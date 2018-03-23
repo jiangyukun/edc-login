@@ -9,6 +9,7 @@ import {SYSTEM_LANGUAGE} from '../core/constants'
 export default class UserStore {
   @observable loginSuccess = false
   @observable submitResetPasswordSuccess = false
+  @observable resetPasswordSuccess = false
 
   login = (username, password) => {
     this.loginSuccess = false
@@ -37,6 +38,21 @@ export default class UserStore {
     }, err => {
       alert(err)
     })
-
   }
+
+  resetPassword = (username, password, token) => {
+    this.resetPasswordSuccess = false
+    const options = {
+      'user_name': username,
+      'password': password,
+      'sign': token,
+      'local': SYSTEM_LANGUAGE.chinese
+    }
+    _post(`/user/v1/password/reset`, {body: options}).then(() => {
+      this.resetPasswordSuccess = true
+    }, err => {
+      alert(err)
+    })
+  }
+
 }

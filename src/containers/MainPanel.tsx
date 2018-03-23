@@ -2,15 +2,16 @@
  * jiangyukun on 2018/3/23.
  */
 import React from 'react'
+import {observer} from 'mobx-react'
 
 import Login from './Login'
 import GetBackPassword from './GetBackPassword'
 
 interface MainPanelProps {
-  match: any
   store: any
 }
 
+@observer
 class MainPanel extends React.Component<MainPanelProps> {
   state = {
     loginPage: true

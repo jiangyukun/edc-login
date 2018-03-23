@@ -18,13 +18,15 @@ interface RootProps {
 class Root extends React.Component<RootProps> {
   render() {
     const store = this.props.store
+    const resetPasswordSuccess = this.props.store.resetPasswordSuccess
 
     return (
       <BrowserRouter>
         <div>
           <Route path={getPathPrefix() + 'resetPassword'}
-                 component={({match}) => <ResetPassword/>}/>
-          <Route path={getPathPrefix() + 'login'} component={({match}) => <MainPanel match={match} store={store}/>}/>
+                 component={() => <ResetPassword store={store} resetPasswordSuccess={resetPasswordSuccess}/>}
+          />
+          <Route path={getPathPrefix() + 'login'} component={() => <MainPanel store={store}/>}/>
         </div>
       </BrowserRouter>
     )
