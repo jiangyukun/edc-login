@@ -24,9 +24,9 @@ class Login extends React.Component<LoginProps> {
   componentWillReceiveProps(nextProps: LoginProps) {
     if (!this.props.loginSuccess && nextProps.loginSuccess) {
       if (isProd()) {
-        location.href = '/project'
+        location.href = '/home'
       } else {
-        location.href = '/inline/project'
+        location.href = '/inline/home'
       }
     }
   }
@@ -49,7 +49,7 @@ class Login extends React.Component<LoginProps> {
                    value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
           </div>
           <button onClick={this.login} disabled={!this.state.username || !this.state.password}>登录</button>
-          <div className="get-back-password" onClick={this.props.getBackPassword}>找回密码</div>
+          <div className="get-back-password" onClick={this.props.getBackPassword}>忘记密码</div>
         </main>
 
       </div>
