@@ -54,7 +54,6 @@ html {
                 height: 30px;
             }
         }
-
         button {
             @include button;
         }
@@ -66,10 +65,9 @@ html {
             cursor: pointer;
         }
     }
-
 }
 
-.get-back-password-page {
+.get-back-password-page, .reset-password {
     border-radius: 5px;
     width: 350px;
     box-shadow: 0 0 10px #aaa;
@@ -119,7 +117,6 @@ html {
     }
     .resend-email {
         margin-top: 20px;
-        //font-size: 12px;
         text-align: center;
         a {
             color: #108EE9;

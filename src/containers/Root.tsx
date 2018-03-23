@@ -18,7 +18,7 @@ interface RootProps {
 class Root extends React.Component<RootProps> {
   render() {
     const store = this.props.store
-    console.log(getPathPrefix() + 'resetPassword')
+
     return (
       <BrowserRouter>
         <div>
