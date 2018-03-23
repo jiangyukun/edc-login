@@ -88,7 +88,7 @@ function method(type) {
           if (result['code'] == 0) {
             resolve(result.data)
           } else {
-            reject(result['message'] || ('错误码：' + result['code']))
+            reject(result['msg'] || ('错误码：' + result['code']))
           }
         } catch (err) {
           throw err

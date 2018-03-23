@@ -3,6 +3,8 @@
  */
 import React from 'react'
 
+import {isProd} from '../core/env'
+
 interface LoginProps {
   login: (username, password) => void
   loginSuccess: boolean
@@ -21,7 +23,11 @@ class Login extends React.Component<LoginProps> {
 
   componentWillReceiveProps(nextProps: LoginProps) {
     if (!this.props.loginSuccess && nextProps.loginSuccess) {
-      location.href = '/inline/project'
+      if (isProd()) {
+        location.href = '/project'
+      } else {
+        location.href = '/inline/project'
+      }
     }
   }
 
@@ -35,10 +41,12 @@ class Login extends React.Component<LoginProps> {
         </header>
         <main className="form">
           <div className="form-item">
-            <input placeholder="用户名" className="input" value={this.state.username} onChange={e => this.setState({username: e.target.value})}/>
+            <input placeholder="用户名" className="input" value={this.state.username}
+                   onChange={e => this.setState({username: e.target.value})}/>
           </div>
           <div className="form-item">
-            <input placeholder="密码" className="input" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
+            <input type="password" placeholder="密码" className="input"
+                   value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
           </div>
           <button onClick={this.login} disabled={!this.state.username || !this.state.password}>登录</button>
           <div className="get-back-password" onClick={this.props.getBackPassword}>找回密码</div>

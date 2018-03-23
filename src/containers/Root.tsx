@@ -3,9 +3,12 @@
  */
 import React from 'react'
 import {observer} from 'mobx-react'
+import {BrowserRouter, Route} from 'react-router-dom'
 
-import Login from './Login'
-import GetBackPassword from './GetBackPassword'
+import MainPanel from './MainPanel'
+
+import {getPathPrefix} from '../core/env'
+import ResetPassword from './ResetPassword'
 
 interface RootProps {
   store: any
@@ -13,37 +16,17 @@ interface RootProps {
 
 @observer
 class Root extends React.Component<RootProps> {
-  state = {
-    loginPage: true
-  }
-
   render() {
     const store = this.props.store
+    console.log(getPathPrefix() + 'resetPassword')
     return (
-      <div className="edc-login-app">
-        {
-          this.state.loginPage && (
-            <Login
-              login={store.login}
-              loginSuccess={store.loginSuccess}
-              getBackPassword={() => this.setState({loginPage: false})}
-            />
-          )
-        }
-        {
-          !this.state.loginPage && (
-            <GetBackPassword
-              getBackToIndex={() => this.setState({loginPage: true})}
-              submitResetPassword={store.submitResetPassword}
-              submitResetPasswordSuccess={store.submitResetPasswordSuccess}
-            />
-          )
-        }
-        <footer className="page-footer">
-          <p>中文 丨 ENGLISH </p>
-          <p>©2018 望吉健康科技版权所有 | 浙ICP备xxxxxxx号</p>
-        </footer>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Route path={getPathPrefix() + 'resetPassword'}
+                 component={({match}) => <ResetPassword/>}/>
+          <Route path={getPathPrefix() + 'login'} component={({match}) => <MainPanel match={match} store={store}/>}/>
+        </div>
+      </BrowserRouter>
     )
   }
 }
