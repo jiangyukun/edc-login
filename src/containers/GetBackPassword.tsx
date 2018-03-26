@@ -14,6 +14,7 @@ interface GetBackPasswordProps {
 }
 
 class GetBackPassword extends React.Component<GetBackPasswordProps> {
+  reSendFlag = false
   state = {
     valid: true,
     username: '',
@@ -26,11 +27,15 @@ class GetBackPassword extends React.Component<GetBackPasswordProps> {
   }
 
   reSend = () => {
+    this.reSendFlag = true
     this.props.submitResetPassword(this.state.username, this.state.email)
   }
 
   componentWillReceiveProps(nextProps: GetBackPasswordProps) {
     if (!this.props.submitResetPasswordSuccess && nextProps.submitResetPasswordSuccess) {
+      if (this.reSendFlag) {
+        alert('重发成功！')
+      }
       this.setState({submitSuccess: true})
     }
   }
@@ -45,12 +50,14 @@ class GetBackPassword extends React.Component<GetBackPasswordProps> {
               <div>
                 <div className="form-item">
                   <Valid valid={this.state.username != ''}>
-                    <input placeholder="用户名" className="input" value={this.state.username} onChange={e => this.setState({username: e.target.value})}/>
+                    <input placeholder="用户名" className="input" value={this.state.username}
+                           onChange={e => this.setState({username: e.target.value})}/>
                   </Valid>
                 </div>
                 <div className="form-item">
                   <Valid valid={isEmail(this.state.email)}>
-                    <input placeholder="邮箱" className="input" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
+                    <input placeholder="邮箱" className="input" value={this.state.email}
+                           onChange={e => this.setState({email: e.target.value})}/>
                   </Valid>
                 </div>
                 <button onClick={this.submit} disabled={!this.state.valid}>提交</button>

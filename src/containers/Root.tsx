@@ -6,9 +6,9 @@ import {observer} from 'mobx-react'
 import {BrowserRouter, Route} from 'react-router-dom'
 
 import MainPanel from './MainPanel'
+import ResetPassword from './ResetPassword'
 
 import {getPathPrefix} from '../core/env'
-import ResetPassword from './ResetPassword'
 
 interface RootProps {
   store: any
